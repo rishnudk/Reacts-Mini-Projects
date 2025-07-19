@@ -20,7 +20,7 @@ const Card = ({title}) => {
     </div>
   )
 }
-
+ 
 const App = () => {
 
   return (
