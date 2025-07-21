@@ -19,7 +19,7 @@ const Card = ({title}) => {
       </button>
     </div>
   )
-}
+} 
  
 const App = () => {
 
