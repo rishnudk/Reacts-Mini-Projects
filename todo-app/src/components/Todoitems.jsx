@@ -16,6 +16,6 @@ const Todoitems = ({text, id, isComplete, deleteTodo, toggle}) => {
          <img onClick={() => {deleteTodo(id)}} src={delete_icon} alt="" className='w-3.5 cursor-pointer' />
          </div>
   )
-}
+} 
 
 export default Todoitems 
