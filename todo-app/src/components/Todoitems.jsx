@@ -18,4 +18,4 @@ const Todoitems = ({text, id, isComplete, deleteTodo, toggle}) => {
   )
 }
 
-export default Todoitems
+export default Todoitems 
