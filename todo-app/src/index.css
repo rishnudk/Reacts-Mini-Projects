@@ -1,1 +1,4 @@
 @import "tailwindcss";
+.react-confirm-alert-overlay {
+  background: transparent !important;
+}
