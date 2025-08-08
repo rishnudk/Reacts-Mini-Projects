@@ -16,7 +16,7 @@ const Todo = () => {
   const isValidTask = (text, todoList, currentId = null) => {
     const trimmed = text.trim();
 
-    // 1. Must be at least 2 characters
+    // 1. Must be at least 2 characters 
     if (trimmed.length < 2) {
       toast.warning("Task must be at least 2 characters long.");
       return false;
