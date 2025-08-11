@@ -16,20 +16,17 @@ const Todo = () => {
   const isValidTask = (text, todoList, currentId = null) => {
     const trimmed = text.trim();
 
-    // 1. Must be at least 2 characters 
     if (trimmed.length < 2) {
       toast.warning("Task must be at least 2 characters long.");
       return false;
     }
 
-    // 2. Reject symbols only (like !!!, @#$%)
     const onlySymbols = /^[^a-zA-Z0-9]+$/;
     if (onlySymbols.test(trimmed)) {
       toast.warning("Task cannot contain only symbols.");
       return false;
     }
 
-    // 3. Prevent duplicate (ignore case, skip currentId if editing)
     const isDuplicate = todoList.some(
       (todo) =>
         todo.text.toLowerCase() === trimmed.toLowerCase() &&
