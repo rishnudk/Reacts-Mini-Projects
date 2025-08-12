@@ -1,20 +1,21 @@
-import { useState,useState } from "react";
+import { useEffect, useState } from "react";
 
 const UserFetch = () => {
-
     const [user, setUser] = useState([])
+
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users/')
-        .then(res => res.join())
+        fetch('http://jsonplaceholder.typicode.com/users/')
+        .then(res => res.json())
         .then(data => setUser(data))
+        .catch(error => console.error('error found')
+        )
     }, [])
 
-    return (
-        <div>
-            {user.map(user => ( <p key= {user.id} > {user.name}</p>))}
-        </div>
-    )
-}
+return (
+    <div>
 
+        {user.map(user => ( <p key = {user.id} > {user.name} </p>) )}
+    </div>
+)}
 
-export default UserFatch;
+export default UserFetch;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function UserFetch() {
+const UserFetch = ()  => {
 
     const [users,setUser] = useState([])
 
