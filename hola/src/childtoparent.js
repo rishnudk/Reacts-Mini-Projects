@@ -1,53 +1,40 @@
 import React, { useState } from 'react';
-import './App.css';
-
-// Child Component
-function ChildComponent({ onDataFromChild }) {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleChange = (event) => {
-    const data = event.target.value;
-    setInputValue(data);
-    // Call the function passed from the parent with the new data
-    onDataFromChild(data);
-  };
-
-  return (
-    <div className="child">
-      <h3>Child Component</h3>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={handleChange}
-        placeholder="Type something here..."
-      />
-    </div>
-  );
-}
-
 
 // Parent Component
-function App() {
-  // State to hold data received from the child
+function ParentComponent() {
   const [dataFromChild, setDataFromChild] = useState('');
 
-  // 1. A function to handle data from the child
-  const handleDataFromChild = (data) => {
-    console.log('Data received from child:', data);
+  // Define the callback function in the parent
+  const handleChildData = (data) => {
     setDataFromChild(data);
+    // console.log('Data received from child:', data); // This line is for debugging and appears in the console.
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Parent Component</h1>
-        <p>Message from Child: <strong>{dataFromChild}</strong></p>
-        <hr />
-        {/* 2. Pass the function to the child as a prop */}
-        <ChildComponent onDataFromChild={handleDataFromChild} />
-      </header>
+    <div>
+      <h2>Parent Component</h2>
+      <p>Data from child: **{dataFromChild}**</p>
+      {/* Pass the callback function as a prop */}
+      <ChildComponent onChildData={handleChildData} />
     </div>
   );
 }
 
-export default App;
+// Child Component
+function ChildComponent({ onChildData }) {
+  const childData = 'Hello from the child!';
+
+  const handleClick = () => {
+    // Call the function and pass data up
+    onChildData(childData);
+  };
+
+  return (
+    <div>
+      <h3>Child Component</h3>
+      <button onClick={handleClick}>Send Data to Parent</button>
+    </div>
+  );
+}
+
+export default ParentComponent;

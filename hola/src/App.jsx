@@ -1,37 +1,40 @@
+import React, { useState } from 'react';
 
-import React, { useState} from "react";
+// Parent Component
+function ParentComponent() {
+  const [dataFromChild, setDataFromChild] = useState('');
 
-function ChildComponent({isChecked}) {
-    return (
-        <div>
-            <h2>Child componenet</h2>
+  // Define the callback function in the parent
+  const handleChildData = (data) => {
+    setDataFromChild(data);
+    // console.log('Data received from child:', data); // This line is for debugging and appears in the console.
+  };
 
-            <label>
-                <input 
-                type = 'checkbox' checked={isChecked}
-                readOnly />
-                Checkbox Status
-            </label>
-        </div>
-    )
+  return (
+    <div>
+      <h2>Parent Component</h2>
+      <p>Data from child: **{dataFromChild}**</p>
+      {/* Pass the callback function as a prop */}
+      <ChildComponent onChildData={handleChildData} />
+    </div>
+  );
 }
 
-function ParentComponent() {
-    const [isChecked, setIsChecked] = useState(false);
+// Child Component
+function ChildComponent({ onChildData }) {
+  const childData = 'Hello from the child!';
 
-    const toggleCheckBox = () => {
-        setIsChecked(!isChecked);
-    }
+  const handleClick = () => {
+    // Call the function and pass data up
+    onChildData(childData);
+  };
 
-    return (
-        <div>
-            <h1>Parent Component</h1>
-        <button onClick={toggleCheckBox}> Toggle Checkbox</button>
-       <ChildComponent isChecked={isChecked}/>
-
-        </div>
-
-    )
+  return (
+    <div>
+      <h3>Child Component</h3>
+      <button onClick={handleClick}>Send Data to Parent</button>
+    </div>
+  );
 }
 
 export default ParentComponent;
