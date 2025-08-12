@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useState,useState } from "react";
 
-function ParentComponenet() {
-    const [dataFromChild, setDataFromChild] = useState('')
+const UserFetch = () => {
 
-    const handleChildData = (data) => {
-        setDataFromChild(data);
-    }
+    const [user, setUser] = useState([])
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users/')
+        .then(res => res.join())
+        .then(data => setUser(data))
+    }, [])
 
     return (
         <div>
-            <p> Data from child {dataFromChild} </p>
-            <Chi
+            {user.map(user => ( <p key= {user.id} > {user.name}</p>))}
         </div>
     )
 }
+
+
+export default UserFatch;

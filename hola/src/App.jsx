@@ -1,40 +1,22 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from "react";
 
-// Parent Component
-function ParentComponent() {
-  const [dataFromChild, setDataFromChild] = useState('');
+const UserFetch = () => {
 
-  // Define the callback function in the parent
-  const handleChildData = (data) => {
-    setDataFromChild(data);
-    // console.log('Data received from child:', data); // This line is for debugging and appears in the console.
-  };
+    const [user, setUser] = useState([])
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users/')
+        .then(res => res.json())
+        .then(data => setUser(data))
+        .catch(error => console.log('error')
+        )
+    }, [])
 
-  return (
-    <div>
-      <h2>Parent Component</h2>
-      <p>Data from child: **{dataFromChild}**</p>
-      {/* Pass the callback function as a prop */}
-      <ChildComponent onChildData={handleChildData} />
-    </div>
-  );
+    return (
+        <div>
+            {user.map(user => ( <p key= {user.id} > {user.name}</p>))}
+        </div>
+    )
 }
 
-// Child Component
-function ChildComponent({ onChildData }) {
-  const childData = 'Hello from the child!';
 
-  const handleClick = () => {
-    // Call the function and pass data up
-    onChildData(childData);
-  };
-
-  return (
-    <div>
-      <h3>Child Component</h3>
-      <button onClick={handleClick}>Send Data to Parent</button>
-    </div>
-  );
-}
-
-export default ParentComponent;
+export default UserFetch;
